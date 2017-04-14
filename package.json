@@ -1,0 +1,28 @@
+{
+  "name": "expressjs-starter-pack",
+  "version": "0.0.1",
+  "description": "A starter pack to run fastly an express app.",
+  "main": "src/index.js",
+  "author": {
+    "name": "Alexandre Vallot",
+    "email": "alexandre.vallot@gmail.com",
+    "url": "http://alexvnd.re"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cluster": "^0.7.7",
+    "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.24.0",
+    "babel-eslint": "^7.2.1",
+    "babel-preset-es2015": "^6.24.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3"
+  }
+}

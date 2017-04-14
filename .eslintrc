@@ -1,0 +1,11 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "rules": {
+    "no-underscore-dangle": "off",
+    "no-unused-vars": "off",
+    "object-shorthand": "off",
+    "no-useless-escape": "off",
+    "max-len": "off"
+  }
+}
