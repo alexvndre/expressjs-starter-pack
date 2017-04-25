@@ -31,7 +31,6 @@ The project is available on [http://127.0.0.1:3000](http://127.0.0.1:3000).
 
 ### TODO
 
-* Tests ([mocha](https://mochajs.org), [istanbul](https://istanbul.js.org))
 * Command sample ([commander](https://github.com/tj/commander.js))
 * Logs ([winston](https://github.com/winstonjs/winston))
 * External HTTP calls ([request](https://github.com/request/request))
