@@ -1,5 +1,6 @@
 import bodyParser from 'body-parser';
 import express from 'express';
+import expressValidator from 'express-validator';
 import config from './config/index';
 import controllers from './controller/index';
 import logger from './helper/logger';
@@ -9,6 +10,14 @@ const app = express();
 app.use(bodyParser.json());
 // To support URL-encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
+// Body validator
+app.use(expressValidator({
+  errorFormatter: (param, msg) => ({
+    code: 400,
+    message: msg,
+  }),
+}));
+// Allow cross domain requests
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'PUT, GET, PATCH, POST, DELETE, OPTIONS');
