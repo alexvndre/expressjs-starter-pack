@@ -4,38 +4,41 @@ BUILD_DIRECTORY=./build
 ESLINT=./node_modules/.bin/eslint
 PORT=3000
 
-.PHONY: build help lint install start
+.PHONY: build clean help lint install start
 
-build:
+.DEFAULT_GOAL := help
+
+build: ## transpile the files from ES6 to JS
 	@$(MAKE) -s lint
 	@echo " > Building the project in $(BUILD_DIRECTORY)"
-	@rm -rf $(BUILD_DIRECTORY)/*
+	@$(MAKE) -s clean
 	@$(BABEL) -q ./src -d $(BUILD_DIRECTORY)
 
-help:
-	@echo "Please use \`make <target>' where <target> is one of"
-	@echo "  build			transpile the files from ES6 to JS"
-	@echo "  lint			lint the code"
-	@echo "  install		install dependencies"
-	@echo "  start			start the web server"
+clean: ## clean artifacts
+	@echo " > Cleaning $(BUILD_DIRECTORY)"
+	@rm -rf $(BUILD_DIRECTORY)
 
-lint:
+help: ## provide help to you
+	@echo "Please use \`make <target>' where <target> is one of"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "	\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+lint: ## check the quality code and ES6 integration
 	@echo " > Linting the source"
 	@$(ESLINT) ./src
 
-install:
+install: ## install dependencies
 	@echo " > Installing the project"
 	@npm install
 
-start:
+start: ## start the web server
 	@echo " > Starting the project"
 	@$(MAKE) -s build
 	@export PORT=$(PORT) && export NODE_ENV=local && node $(BUILD_DIRECTORY)/index.js
 
-test:
+test: ## launch tests
 	@echo " > Testing"
 	@echo "No test available"
 
-test-coverage:
+test-coverage: ## launch tests with coverage
 	@echo " > Testing with coverage"
 	@echo "No test available"
