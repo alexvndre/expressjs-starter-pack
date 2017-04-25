@@ -17,8 +17,6 @@ Install dependencies from [npm](https://www.npmjs.com) (or whatever).
 
 ### Run tests
 
-No test available yet.
-
 Run tests to verify the installation.
 
 `$ make test` or `$ make test-coverage`
