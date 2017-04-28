@@ -21,7 +21,7 @@ app.use(expressValidator({
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'PUT, GET, PATCH, POST, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With, Origin, Content-Type, Authorization, Accept, x-environment, x-version');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With, Origin, Content-Type, Authorization, Accept');
   next();
 });
 app.use(controllers);

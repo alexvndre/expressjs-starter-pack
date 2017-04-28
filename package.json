@@ -1,6 +1,6 @@
 {
   "name": "expressjs-starter-pack",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A starter pack to run fastly an express app.",
   "main": "src/index.js",
   "author": {
