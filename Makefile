@@ -43,13 +43,9 @@ start: ## start the web server
 test: ## launch tests
 	@echo " > Testing the project"
 	@$(MAKE) -s build
-	@export PORT=$(PORT)
-	@export NODE_ENV=$(ENVIRONMENT_TEST)
-	@$(MOCHA) --compilers js:babel-core/register --recursive --reporter nyan
+	@export PORT=$(PORT) && export NODE_ENV=$(ENVIRONMENT_TEST) && $(MOCHA) --compilers js:babel-core/register --recursive
 
 test-coverage: ## launch tests with coverage
 	@echo " > Testing with coverage"
 	@$(MAKE) -s build
-	@export PORT=$(PORT)
-	@export NODE_ENV=$(ENVIRONMENT_TEST)
-	@$(BABEL_NODE) $(BABEL_ISTANBUL) cover $(MOCHA_) --report html --report text --check-coverage -- --recursive
+	@export PORT=$(PORT) && export NODE_ENV=$(ENVIRONMENT_TEST) && $(BABEL_NODE) $(BABEL_ISTANBUL) cover $(MOCHA_) --report html --report text --check-coverage -- --recursive
