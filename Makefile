@@ -1,15 +1,4 @@
-BABEL=./node_modules/.bin/babel
-BABEL_ISTANBUL=./node_modules/.bin/babel-istanbul
-BABEL_NODE=./node_modules/.bin/babel-node
-BUILD_DIRECTORY=./build
-ENVIRONMENT=local
-ENVIRONMENT_TEST=test
-ESLINT=./node_modules/.bin/eslint
-MOCHA=./node_modules/.bin/mocha
-MOCHA_=./node_modules/.bin/_mocha
-PORT=0
-
-.PHONY: build clean help lint install start test test-coverage
+.PHONY: build check clean help lint install start test test-coverage
 
 .DEFAULT_GOAL := help
 
@@ -18,6 +7,10 @@ build: ## transpile the files from ES6 to JS
 	@$(MAKE) -s clean
 	@echo " > Building the project in $(BUILD_DIRECTORY)"
 	@$(BABEL) -q ./src -d $(BUILD_DIRECTORY)
+
+check: ## check dependencies
+	@echo " > Checking dependencies"
+	@$(NCU)
 
 clean: ## clean artifacts
 	@echo " > Cleaning $(BUILD_DIRECTORY)"
@@ -32,6 +25,8 @@ lint: ## check the quality code and ES6 integration
 	@$(ESLINT) ./src
 
 install: ## install dependencies
+	@echo " > Copying env file"
+	@cp ./.env.dist ./.env
 	@echo " > Installing the project"
 	@npm install
 
@@ -43,7 +38,7 @@ start: ## start the web server
 test: ## launch tests
 	@echo " > Testing the project"
 	@$(MAKE) -s build
-	@export PORT=$(PORT) && export NODE_ENV=$(ENVIRONMENT_TEST) && $(MOCHA) --compilers js:babel-core/register --recursive
+	@export PORT=$(PORT) && export NODE_ENV=$(ENVIRONMENT_TEST) && $(MOCHA) --require babel-core/register --recursive --exit
 
 test-coverage: ## launch tests with coverage
 	@echo " > Testing with coverage"

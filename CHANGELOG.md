@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.0.5] - 2017-11-03
+### Added
+- Env file.
+- [Cors](https://github.com/expressjs/cors) library.
+### Changed
+- Update dependencies
+- Update lint rules
+- Update makefile
+### Removed
+- Manual cors.
+- Nyan cat reporter useless.
+
 ## [0.0.4] - 2017-11-03
 ### Added
 - Winston log.
