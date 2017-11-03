@@ -26,7 +26,9 @@ app.use((req, res, next) => {
 });
 app.use(controllers);
 // Error middleware
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
+  logger.error(err.message, err);
+
   res.status(500).send({
     code: 500,
     message: err.stack,
