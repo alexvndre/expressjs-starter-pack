@@ -30,7 +30,6 @@ The project is available on [http://127.0.0.1:3000](http://127.0.0.1:3000).
 ### TODO
 
 * Command sample ([commander](https://github.com/tj/commander.js))
-* Logs ([winston](https://github.com/winstonjs/winston))
 * External HTTP calls ([request](https://github.com/request/request))
 * Mock test ([sinon.js](http://sinonjs.org))
 * BDD ([mongodb](https://www.npmjs.com/package/mongodb) and other wrappers)
