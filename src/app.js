@@ -1,4 +1,7 @@
+/* eslint no-unused-vars: ["error", { "args": "none" }] */
+
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import express from 'express';
 import expressValidator from 'express-validator';
 import config from './config/index';
@@ -18,12 +21,7 @@ app.use(expressValidator({
   }),
 }));
 // Allow cross domain requests
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, PATCH, POST, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With, Origin, Content-Type, Authorization, Accept');
-  next();
-});
+app.use(cors());
 app.use(controllers);
 // Error middleware
 app.use((err, req, res, next) => {

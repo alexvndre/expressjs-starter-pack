@@ -1,3 +1,5 @@
+/* eslint no-underscore-dangle: ["error", { "allow": ["_logger"] }] */
+
 import winston from 'winston';
 import config from './../config/index';
 
@@ -6,7 +8,7 @@ class Logger {
     this._logger = new winston.Logger({
       level: 'error',
       transports: [
-        new winston.transports.File({ filename: './var/log//error.log' }),
+        new winston.transports.File({ filename: './var/log/error.log' }),
       ],
     });
 
