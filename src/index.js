@@ -25,6 +25,6 @@ if (cluster.isMaster) {
     cluster.fork();
   });
 } else { // Code to run if we're in a worker process
-  require('./app');
+  require('./server');
   logger.info(`Worker ${cluster.worker.id} running!`);
 }

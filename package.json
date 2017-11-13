@@ -12,9 +12,11 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "cluster": "^0.7.7",
+    "config": "^1.27.0",
     "cors": "^2.8.4",
     "express": "^4.15.2",
     "express-validator": "^4.3.0",
+    "normalize-port": "^1.0.0",
     "winston": "^2.3.1"
   },
   "devDependencies": {

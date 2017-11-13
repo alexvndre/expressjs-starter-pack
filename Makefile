@@ -1,3 +1,5 @@
+include ./.env
+
 .PHONY: build check clean help lint install start test test-coverage
 
 .DEFAULT_GOAL := help
@@ -18,7 +20,7 @@ clean: ## clean artifacts
 
 help: ## provide help to you
 	@echo "Please use \`make <target>' where <target> is one of"
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "	\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+	@echo "$$(grep -hE '^\S+:.*##' $(MAKEFILE_LIST) | sed -e 's/:.*##\s*/:/' -e 's/^\(.\+\):\(.*\)/\1:\2/' | column -c2 -t -s :)"
 
 lint: ## check the quality code and ES6 integration
 	@echo " > Linting the source"
@@ -33,14 +35,14 @@ install: ## install dependencies
 start: ## start the web server
 	@echo " > Starting the project"
 	@$(MAKE) -s build
-	@export PORT=$(PORT) && export NODE_ENV=$(ENVIRONMENT) && node $(BUILD_DIRECTORY)/index.js
+	@node $(BUILD_DIRECTORY)/index.js
 
 test: ## launch tests
 	@echo " > Testing the project"
 	@$(MAKE) -s build
-	@export PORT=$(PORT) && export NODE_ENV=$(ENVIRONMENT_TEST) && $(MOCHA) --require babel-core/register --recursive --exit
+	@export PORT=0 && export NODE_ENV=test && $(MOCHA) --require babel-core/register --recursive --exit
 
 test-coverage: ## launch tests with coverage
 	@echo " > Testing with coverage"
 	@$(MAKE) -s build
-	@export PORT=$(PORT) && export NODE_ENV=$(ENVIRONMENT_TEST) && $(BABEL_NODE) $(BABEL_ISTANBUL) cover $(MOCHA_) --report html --report text --check-coverage -- --recursive
+	@export PORT=0 && export NODE_ENV=test && $(BABEL_NODE) $(BABEL_ISTANBUL) cover $(MOCHA_) --report html --report text --check-coverage -- --recursive
