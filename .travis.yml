@@ -3,7 +3,7 @@ node_js:
   - "6"
 env:
   - NODE_ENV=test
-install:
-  - make install
+before_script:
+  - cp ./.env.dist ./.env
 script:
   - make test
