@@ -1,4 +1,4 @@
-Express.js starter pack
+Express.js starter pack [![Build Status](https://travis-ci.org/alexvndre/expressjs-starter-pack.svg?branch=master)](https://travis-ci.org/alexvndre/expressjs-starter-pack)
 ======
 
 A ready to use [Express.js](https://expressjs.com) solution.
