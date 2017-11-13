@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.0.7] - 2017-11-13
 ### Added
-- Config dependency
+- Add Docker
 
 ## [0.0.6] - 2017-11-13
 ### Added
