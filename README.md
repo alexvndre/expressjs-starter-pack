@@ -23,7 +23,7 @@ Run tests to verify the installation.
 
 ### Run the project
 
-The project is available on [http://127.0.0.1:3000](http://127.0.0.1:3000).
+The project is available on [http://127.0.0.1:<PORT>](http://127.0.0.1:<PORT>).
 
 `$ make start`
 

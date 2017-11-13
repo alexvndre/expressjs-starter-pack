@@ -4,7 +4,6 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 import expressValidator from 'express-validator';
-import config from './config/index';
 import controllers from './controller/index';
 import logger from './helper/logger';
 
@@ -33,8 +32,4 @@ app.use((err, req, res, next) => {
   });
 });
 
-const listener = app.listen(config.app.port, () => {
-  logger.info(`Listening on port ${listener.address().port}`);
-});
-
-export default listener;
+export default app;

@@ -1,7 +1,6 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_logger"] }] */
 
 import winston from 'winston';
-import config from './../config/index';
 
 class Logger {
   constructor() {
@@ -12,23 +11,23 @@ class Logger {
       ],
     });
 
-    if (config.app.environment === 'local') {
+    if (process.env.NODE_ENV === 'local') {
       this._logger.add(winston.transports.Console, {
         level: 'info',
         timestamp: () => (new Date().toISOString()),
-        formatter: options => (`${options.timestamp()} ${winston.config.colorize(options.level, options.level.toUpperCase())} ${(options.message ? options.message : '')} ${(options.meta && Object.keys(options.meta).length ? `\n\t${JSON.stringify(options.meta)}` : '')}`),
+        formatter: options => (`[${winston.config.colorize(options.level, options.level.toUpperCase())}][${options.timestamp()}] ${(options.message ? options.message : '')} ${(options.meta && Object.keys(options.meta).length ? `\n\t${JSON.stringify(options.meta)}` : '')}`),
       });
     }
   }
 
   info(message, meta) {
-    if (config.app.environment === 'local') {
+    if (process.env.NODE_ENV === 'local') {
       this._logger.log('info', message, meta);
     }
   }
 
   error(message, meta) {
-    if (config.app.environment === 'local') {
+    if (process.env.NODE_ENV === 'local') {
       this._logger.log('error', message, meta);
     }
   }
