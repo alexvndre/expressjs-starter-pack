@@ -1,5 +1,6 @@
-Express.js starter pack [![Build Status](https://travis-ci.org/alexvndre/expressjs-starter-pack.svg?branch=master)](https://travis-ci.org/alexvndre/expressjs-starter-pack)
-======
+# Express.js starter pack
+
+[![Build Status](https://travis-ci.org/alexvndre/expressjs-starter-pack.svg?branch=master)](https://travis-ci.org/alexvndre/expressjs-starter-pack)
 
 A ready to use [Express.js](https://expressjs.com) solution.
 
@@ -42,10 +43,3 @@ You can check that your image is listed by Docker with `$ docker images`.
 Check if the image is running with `$ docker ps`. You can read the app output with `$ docker logs <CONTAINER_ID>`.
 If you need to run an app command, `$ docker exec -it <CONTAINER_ID> /bin/bash`.
 To kill it: `$ docker kill <CONTAINER_ID>`.
-
-### TODO
-
-* Command sample ([commander](https://github.com/tj/commander.js))
-* External HTTP calls ([request](https://github.com/request/request))
-* Mock test ([sinon.js](http://sinonjs.org))
-* BDD ([mongodb](https://www.npmjs.com/package/mongodb) and other wrappers)
