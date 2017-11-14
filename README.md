@@ -1,5 +1,8 @@
-Express.js starter pack
-======
+# Express.js starter pack
+
+[![Build Status](https://travis-ci.org/alexvndre/expressjs-starter-pack.svg?branch=master)](https://travis-ci.org/alexvndre/expressjs-starter-pack)
+[![bitHound Overall Score](https://www.bithound.io/github/alexvndre/expressjs-starter-pack/badges/score.svg)](https://www.bithound.io/github/alexvndre/expressjs-starter-pack)
+[![Coverage Status](https://coveralls.io/repos/github/alexvndre/expressjs-starter-pack/badge.svg?branch=feature%2Fci)](https://coveralls.io/github/alexvndre/expressjs-starter-pack?branch=feature%2Fci)
 
 A ready to use [Express.js](https://expressjs.com) solution.
 
@@ -23,7 +26,7 @@ Run tests to verify the installation.
 
 ### Run the project (without [Docker](https://www.docker.com/))
 
-The project is available on [http://127.0.0.1:<PORT>](http://127.0.0.1:<PORT>).
+The project is available on `http://127.0.0.1:<PORT>`.
 
 `$ make start`
 
@@ -42,10 +45,3 @@ You can check that your image is listed by Docker with `$ docker images`.
 Check if the image is running with `$ docker ps`. You can read the app output with `$ docker logs <CONTAINER_ID>`.
 If you need to run an app command, `$ docker exec -it <CONTAINER_ID> /bin/bash`.
 To kill it: `$ docker kill <CONTAINER_ID>`.
-
-### TODO
-
-* Command sample ([commander](https://github.com/tj/commander.js))
-* External HTTP calls ([request](https://github.com/request/request))
-* Mock test ([sinon.js](http://sinonjs.org))
-* BDD ([mongodb](https://www.npmjs.com/package/mongodb) and other wrappers)

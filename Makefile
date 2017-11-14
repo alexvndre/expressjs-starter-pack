@@ -40,9 +40,21 @@ start: ## start the web server
 test: ## launch tests
 	@echo " > Testing the project"
 	@$(MAKE) -s build
-	@export PORT=0 && export NODE_ENV=test && $(MOCHA) --require babel-core/register --recursive --exit
+	@export PORT=0 && \
+		export NODE_ENV=test &&  \
+		$(MOCHA) --require babel-core/register --recursive --exit
 
 test-coverage: ## launch tests with coverage
 	@echo " > Testing with coverage"
 	@$(MAKE) -s build
-	@export PORT=0 && export NODE_ENV=test && $(BABEL_NODE) $(BABEL_ISTANBUL) cover $(MOCHA_) --report html --report text --check-coverage -- --recursive
+	@export PORT=0 && \
+		export NODE_ENV=test && \
+		$(BABEL_NODE) $(BABEL_ISTANBUL) cover $(MOCHA_) --report html --report text --check-coverage -- --recursive --exit
+
+test-coveralls: ## launch tests with coverage and send to coveralls
+	@export PORT=0 && \
+		export NODE_ENV=test && \
+		export COVERALLS_SERVICE_NAME=travis-ci && \
+		$(BABEL_NODE) $(BABEL_ISTANBUL) cover $(MOCHA_) --report lcovonly --check-coverage -- --recursive --exit && \
+		cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && \
+		rm -rf ./coverage

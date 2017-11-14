@@ -1,8 +1,9 @@
+import { describe, it } from 'mocha';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from './../../src/server';
 
-const should = chai.should();
+chai.should();
 
 chai.use(chaiHttp);
 
@@ -13,10 +14,8 @@ describe('controller/index', () => {
       .get('/not-found-route')
       .send()
       .end((err, res) => {
-        res.should.have.status(404);
-        res.body.should.have.property('code');
+        res.status.should.eql(404);
         res.body.code.should.eql(404);
-        res.body.should.have.property('message');
         res.body.message.should.eql('Not found');
         done();
       });

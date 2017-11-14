@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.0.8] - 2017-11-14
+### Added
+- Add CI
+- Add [Travis](https://travis-ci.org/alexvndre/expressjs-starter-pack)
+- Add [Coveralls](https://coveralls.io/github/alexvndre/expressjs-starter-pack)
+- Add [Bithound](https://www.bithound.io/github/alexvndre/expressjs-starter-pack/master)
+### Changed
+- Update linter es2015 to env
+- Lint tests ok
+
 ## [0.0.7] - 2017-11-13
 ### Added
 - Add Docker
