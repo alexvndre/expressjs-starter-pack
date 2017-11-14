@@ -1,6 +1,7 @@
 # Express.js starter pack
 
 [![Build Status](https://travis-ci.org/alexvndre/expressjs-starter-pack.svg?branch=master)](https://travis-ci.org/alexvndre/expressjs-starter-pack)
+[![bitHound Overall Score](https://www.bithound.io/github/alexvndre/expressjs-starter-pack/badges/score.svg)](https://www.bithound.io/github/alexvndre/expressjs-starter-pack)
 
 A ready to use [Express.js](https://expressjs.com) solution.
 
