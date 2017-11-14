@@ -2,7 +2,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from './../../../src/server';
 
-const should = chai.should();
+chai.should();
 
 chai.use(chaiHttp);
 
@@ -13,7 +13,7 @@ describe('controller/v1/resource', () => {
       .get('/v1/resources')
       .send()
       .end((err, res) => {
-        res.should.have.status(200);
+        res.status.should.eql(200);
         res.body.should.be.a('array');
         res.body.forEach((item) => {
           item.should.be.a('object');
@@ -29,7 +29,7 @@ describe('controller/v1/resource', () => {
       .set('Content-Type', 'application/json')
       .send({ test: 'test' })
       .end((err, res) => {
-        res.should.have.status(400);
+        res.status.should.eql(400);
         res.body.should.be.a('array');
         res.body[0].should.have.property('code');
         res.body[0].should.have.property('message');
@@ -46,7 +46,7 @@ describe('controller/v1/resource', () => {
       .set('Content-Type', 'application/json')
       .send({ name: 'test' })
       .end((err, res) => {
-        res.should.have.status(201);
+        res.status.should.eql(201);
         res.body.should.be.a('object');
         res.body.should.have.property('id');
         res.body.should.have.property('name');
@@ -61,7 +61,7 @@ describe('controller/v1/resource', () => {
       .get('/v1/resources/1')
       .send()
       .end((err, res) => {
-        res.should.have.status(200);
+        res.status.should.eql(200);
         res.body.should.be.a('object');
         res.body.should.have.property('id');
         res.body.should.have.property('name');
@@ -76,7 +76,7 @@ describe('controller/v1/resource', () => {
       .put('/v1/resources/1')
       .send({ name: 'test' })
       .end((err, res) => {
-        res.should.have.status(200);
+        res.status.should.eql(200);
         res.body.should.be.a('object');
         res.body.should.have.property('id');
         res.body.should.have.property('name');
@@ -91,7 +91,7 @@ describe('controller/v1/resource', () => {
       .delete('/v1/resources/1')
       .send()
       .end((err, res) => {
-        res.should.have.status(204);
+        res.status.should.eql(204);
         done();
       });
   });
