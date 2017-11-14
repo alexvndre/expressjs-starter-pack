@@ -52,9 +52,7 @@ test-coverage: ## launch tests with coverage
 		$(BABEL_NODE) $(BABEL_ISTANBUL) cover $(MOCHA_) --report html --report text --check-coverage -- --recursive --exit
 
 test-coveralls: ## launch tests with coverage and send to coveralls
-	@export COVERALLS_SERVICE_NAME=service_name && \
-		export COVERALLS_REPO_TOKEN=repo_token && \
-		export PORT=0 && \
+	@export PORT=0 && \
 		export NODE_ENV=test && \
 		$(BABEL_NODE) $(BABEL_ISTANBUL) cover $(MOCHA_) --report lcovonly --check-coverage -- --recursive --exit && \
 		cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && \
