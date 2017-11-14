@@ -11,7 +11,7 @@ class Logger {
       ],
     });
 
-    if (process.env.NODE_ENV === 'local') {
+    if (process.env.NODE_ENV === 'local' || process.env.NODE_ENV === 'test') {
       this._logger.add(winston.transports.Console, {
         level: 'info',
         timestamp: () => (new Date().toISOString()),
@@ -21,13 +21,13 @@ class Logger {
   }
 
   info(message, meta) {
-    if (process.env.NODE_ENV === 'local') {
+    if (process.env.NODE_ENV === 'local' || process.env.NODE_ENV === 'test') {
       this._logger.log('info', message, meta);
     }
   }
 
   error(message, meta) {
-    if (process.env.NODE_ENV === 'local') {
+    if (process.env.NODE_ENV === 'local' || process.env.NODE_ENV === 'test') {
       this._logger.log('error', message, meta);
     }
   }

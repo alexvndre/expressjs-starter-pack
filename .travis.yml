@@ -11,4 +11,3 @@ script:
   - make test
 after_script:
   - make test-coveralls
-#  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
