@@ -26,7 +26,7 @@ Run tests to verify the installation.
 
 ### Run the project (without [Docker](https://www.docker.com/))
 
-The project is available on [http://127.0.0.1:<PORT>](http://127.0.0.1:<PORT>).
+The project is available on `http://127.0.0.1:<PORT>`.
 
 `$ make start`
 
