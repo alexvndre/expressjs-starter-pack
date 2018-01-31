@@ -14,6 +14,8 @@ A ready to use [Express.js](https://expressjs.com) solution.
 
 ### Install the project
 
+You must duplicate the env file `$ cp .env.dist .env`.
+
 Install dependencies from [npm](https://www.npmjs.com) (or whatever).
 
 `$ make install`

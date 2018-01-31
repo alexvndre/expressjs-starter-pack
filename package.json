@@ -1,6 +1,6 @@
 {
   "name": "expressjs-starter-pack",
-  "version": "0.0.5",
+  "version": "0.0.9",
   "description": "A starter pack to run fastly an express app.",
   "main": "src/index.js",
   "author": {
@@ -39,8 +39,5 @@
     "mocha-istanbul": "^0.3.0",
     "mocha-lcov-reporter": "^1.3.0",
     "npm-check-updates": "^2.13.0"
-  },
-  "scripts": {
-    "install": "cp ./.env.dist ./.env"
   }
 }

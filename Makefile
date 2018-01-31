@@ -27,15 +27,14 @@ lint: ## check the quality code and ES6 integration
 	@$(ESLINT) ./src
 
 install: ## install dependencies
-	@echo " > Copying env file"
-	@cp ./.env.dist ./.env
 	@echo " > Installing the project"
 	@npm install
 
 start: ## start the web server
 	@echo " > Starting the project"
 	@$(MAKE) -s build
-	@node $(BUILD_DIRECTORY)/index.js
+	@export NODE_ENV=dev && \
+		node $(BUILD_DIRECTORY)/index.js
 
 test: ## launch tests
 	@echo " > Testing the project"
