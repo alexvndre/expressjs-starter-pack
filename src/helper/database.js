@@ -1,0 +1,90 @@
+import config from 'config';
+import mongodb from 'mongodb';
+import logger from './logger';
+
+const state = {
+  db: null,
+};
+
+exports.connect = () => new Promise((resolve, reject) => {
+  if (state.db) {
+    logger.info('Connection already opened');
+
+    resolve();
+  } else {
+    const mongoConf = config.get('mongo');
+    let uri = `mongodb://${mongoConf.host}:${mongoConf.port}`;
+
+    if (mongoConf.user) {
+      uri = `mongodb://${mongoConf.user}:${mongoConf.password}@${mongoConf.host}:${mongoConf.port}`;
+    }
+
+    uri = `${uri}/${mongoConf.database}`;
+
+    mongodb.MongoClient.connect(uri)
+      .then((db) => {
+        logger.info('Connected to the database');
+
+        state.db = db;
+
+        resolve();
+      })
+      .catch((err) => {
+        logger.error(`Connection failed: ${err.message}`);
+
+        reject(err);
+      });
+  }
+});
+
+exports.get = () => state.db;
+
+exports.close = () => new Promise((resolve, reject) => {
+  if (state.db) {
+    state.db.close()
+      .then(() => {
+        state.db = null;
+
+        logger.info('Closed the connection with the database');
+
+        resolve(null);
+      })
+      .catch((err) => {
+        logger.error(`Closing failed: ${err.message}`);
+
+        reject(err);
+      });
+  } else {
+    logger.info('Connection already closed');
+
+    resolve(null);
+  }
+});
+
+exports.drop = () => new Promise((resolve, reject) => {
+  if (state.db) {
+    state.db.collections((err, collections) => {
+      collections.forEach((collection) => {
+        collection.removeMany();
+      });
+    });
+
+    resolve(null);
+  } else {
+    reject(new Error('Missing database connection'));
+  }
+});
+
+exports.fixture = (name, data) => new Promise((resolve, reject) => {
+  if (state.db) {
+    state.db.createCollection(name, (err, collection) => {
+      collection.insert(data, (errInsert) => {
+        if (errInsert) {
+          reject(err);
+        } else {
+          resolve(null);
+        }
+      });
+    });
+  }
+});
