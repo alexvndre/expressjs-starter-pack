@@ -21,19 +21,19 @@ exports.connect = () => new Promise((resolve, reject) => {
 
     uri = `${uri}/${mongoConf.database}`;
 
-    mongodb.MongoClient.connect(uri)
-      .then((db) => {
-        logger.info('Connected to the database');
-
-        state.db = db;
-
-        resolve();
-      })
-      .catch((err) => {
+    mongodb.MongoClient.connect(uri, (err, db) => {
+      if (err) {
         logger.error(`Connection failed: ${err.message}`);
 
         reject(err);
-      });
+      } else {
+        logger.info('Connected to the database');
+
+        state.db = db.db(mongoConf.database);
+
+        resolve();
+      }
+    });
   }
 });
 
@@ -63,11 +63,17 @@ exports.close = () => new Promise((resolve, reject) => {
 
 exports.drop = () => new Promise((resolve, reject) => {
   if (state.db) {
-    state.db.collections((err, collections) => {
-      collections.forEach((collection) => {
-        collection.removeMany();
+    if (state.db.collections) {
+      state.db.collections((err, collections) => {
+        if (err) {
+          reject(err);
+        } else {
+          for (let i = 0; i < collections.length; i += 1) {
+            collections[i].removeMany();
+          }
+        }
       });
-    });
+    }
 
     resolve(null);
   } else {
@@ -78,13 +84,19 @@ exports.drop = () => new Promise((resolve, reject) => {
 exports.fixture = (name, data) => new Promise((resolve, reject) => {
   if (state.db) {
     state.db.createCollection(name, (err, collection) => {
-      collection.insert(data, (errInsert) => {
-        if (errInsert) {
-          reject(err);
-        } else {
-          resolve(null);
-        }
-      });
+      if (err) {
+        reject(err);
+      } else {
+        collection.insert(data, (errInsert) => {
+          if (errInsert) {
+            reject(errInsert);
+          } else {
+            resolve(null);
+          }
+        });
+      }
     });
+  } else {
+    reject(new Error('Missing database connection'));
   }
 });

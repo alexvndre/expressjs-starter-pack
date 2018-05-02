@@ -13,14 +13,14 @@ chai.use(chaiHttp);
 describe('controller/v1/resource', () => {
   before((done) => {
     db.connect()
-      .then(done);
+      .then(done());
   });
 
   beforeEach((done) => {
     db.drop()
       .then(() => {
         db.fixture('Resource', fixtures)
-          .then(done);
+          .then(done());
       });
   });
 
@@ -68,9 +68,8 @@ describe('controller/v1/resource', () => {
       .end((err, res) => {
         res.status.should.eql(201);
         res.body.should.be.a('object');
-        res.body.should.have.property('id');
+        res.body.should.have.property('_id');
         res.body.should.have.property('name');
-        res.body.id.should.eql(1);
 
         resourceRepository.findOneBy({ name: 'test' })
           .then((doc) => {
