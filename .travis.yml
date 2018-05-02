@@ -7,7 +7,4 @@ env:
 before_script:
   - cp ./.env.dist ./.env
 script:
-  - ./node_modules/.bin/bithound check git@github.com:alexvndre/expressjs-starter-pack.git
   - make test
-# after_script:
-#  - make test-coveralls
