@@ -13,14 +13,14 @@ chai.use(chaiHttp);
 describe('controller/v1/resource', () => {
   before((done) => {
     db.connect()
-      .then(done());
+      .then(done);
   });
 
   beforeEach((done) => {
     db.drop()
       .then(() => {
         db.fixture('Resource', fixtures)
-          .then(done());
+          .then(done);
       });
   });
 
@@ -54,6 +54,7 @@ describe('controller/v1/resource', () => {
         res.body[0].should.have.property('code');
         res.body[0].should.have.property('message');
         res.body[0].code.should.eql(400);
+
         res.body[0].message.should.eql('The field name is required.');
         done();
       });

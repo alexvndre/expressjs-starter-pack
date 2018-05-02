@@ -1,4 +1,6 @@
-/* eslint no-underscore-dangle: ["error", { "allow": ["_collectionName", "_defaultOptions"] }] */
+/* eslint no-underscore-dangle: [
+    "error", { "allow": ["_collectionName", "_defaultOptions", "_getCollection"] }
+   ] */
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["insertOne"] }] */
 
 import db from './../helper/database';
@@ -17,44 +19,67 @@ class AbstractRepository {
     }
   }
 
-  insertOne(doc) {
+  _getCollection() {
     return new Promise((resolve, reject) => {
-      db.get().collection(this._collectionName).insertOne(doc, (err, res) => {
+      db.getDb().collection(this._collectionName, (err, collection) => {
         if (err) {
           return reject(err);
         }
 
-        return resolve(res.ops[0]);
+        return resolve(collection);
       });
+    });
+  }
+
+  insertOne(doc) {
+    return new Promise((resolve, reject) => {
+      this._getCollection()
+        .then((collection) => {
+          collection
+            .insertOne(doc, (err, res) => {
+              if (err) {
+                return reject(err);
+              }
+
+              return resolve(res.ops[0]);
+            });
+        });
     });
   }
 
   findBy(query = {}, options = this._defaultOptions) {
     return new Promise((resolve, reject) => {
-      db.get().collection(this._collectionName)
-        .find(query, options)
-        .skip(options.skip)
-        .limit(options.limit)
-        .sort(options.sort)
-        .toArray((err, res) => {
-          if (err) {
-            return reject(err);
-          }
+      this._getCollection()
+        .then((collection) => {
+          collection
+            .find(query)
+            .skip(options.skip)
+            .limit(options.limit)
+            .sort(options.sort)
+            .toArray((errCollection, res) => {
+              if (errCollection) {
+                return reject(errCollection);
+              }
 
-          return resolve(res);
+              return resolve(res);
+            });
         });
     });
   }
 
   findOneBy(query = {}, options = this._defaultOptions) {
     return new Promise((resolve, reject) => {
-      db.get().collection(this._collectionName).findOne(query, options, (err, res) => {
-        if (err) {
-          return reject(err);
-        }
+      this._getCollection()
+        .then((collection) => {
+          collection
+            .findOne(query, options, (err, res) => {
+              if (err) {
+                return reject(err);
+              }
 
-        return resolve(res);
-      });
+              return resolve(res);
+            });
+        });
     });
   }
 
@@ -62,13 +87,16 @@ class AbstractRepository {
     return new Promise((resolve, reject) => {
       const opts = { sort: { _id: -1 }, upsert: true };
 
-      db.get().collection(this._collectionName)
-        .findOneAndUpdate(filter, update, opts, (err, res) => {
-          if (err) {
-            return reject(err);
-          }
+      this._getCollection()
+        .then((collection) => {
+          collection
+            .findOneAndUpdate(filter, update, opts, (err, res) => {
+              if (err) {
+                return reject(err);
+              }
 
-          return resolve(res.value);
+              return resolve(res.value);
+            });
         });
     });
   }
@@ -77,26 +105,32 @@ class AbstractRepository {
     return new Promise((resolve, reject) => {
       const opts = { sort: { _id: -1 } };
 
-      db.get().collection(this._collectionName)
-        .findOneAndDelete(filter, opts, (err, res) => {
-          if (err) {
-            return reject(err);
-          }
+      this._getCollection()
+        .then((collection) => {
+          collection
+            .findOneAndDelete(filter, opts, (err, res) => {
+              if (err) {
+                return reject(err);
+              }
 
-          return resolve(res.value);
+              return resolve(res.value);
+            });
         });
     });
   }
 
   count(query = {}) {
     return new Promise((resolve, reject) => {
-      db.get().collection(this._collectionName)
-        .count(query, {}, (err, res) => {
-          if (err) {
-            return reject(err);
-          }
+      this._getCollection()
+        .then((collection) => {
+          collection
+            .count(query, {}, (err, res) => {
+              if (err) {
+                return reject(err);
+              }
 
-          return resolve(res);
+              return resolve(res);
+            });
         });
     });
   }
