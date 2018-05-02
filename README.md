@@ -1,8 +1,6 @@
 # Express.js starter pack
 
 [![Build Status](https://travis-ci.org/alexvndre/expressjs-starter-pack.svg?branch=master)](https://travis-ci.org/alexvndre/expressjs-starter-pack)
-[![bitHound Overall Score](https://www.bithound.io/github/alexvndre/expressjs-starter-pack/badges/score.svg)](https://www.bithound.io/github/alexvndre/expressjs-starter-pack)
-[![Coverage Status](https://coveralls.io/repos/github/alexvndre/expressjs-starter-pack/badge.svg?branch=feature%2Fci)](https://coveralls.io/github/alexvndre/expressjs-starter-pack?branch=feature%2Fci)
 
 A ready to use [Express.js](https://expressjs.com) solution.
 

@@ -5,9 +5,12 @@ import cors from 'cors';
 import express from 'express';
 import expressValidator from 'express-validator';
 import controllers from './controller/index';
+import db from './helper/database';
 import logger from './helper/logger';
 
 const app = express();
+
+db.connect();
 
 app.use(bodyParser.json());
 // To support URL-encoded bodies

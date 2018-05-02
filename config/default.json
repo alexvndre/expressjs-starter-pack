@@ -1,5 +1,12 @@
 {
   "app": {
     "name": "expressjs-starter-pack"
+  },
+  "mongo": {
+    "database": "expressjs-starter-pack",
+    "host": "localhost",
+    "password": null,
+    "port": 27017,
+    "user": null
   }
 }

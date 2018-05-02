@@ -1,6 +1,6 @@
 {
   "name": "expressjs-starter-pack",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A starter pack to run fastly an express app.",
   "main": "src/index.js",
   "author": {
@@ -16,6 +16,7 @@
     "cors": "^2.8.4",
     "express": "^4.15.2",
     "express-validator": "^4.3.0",
+    "mongodb": "^3.0.2",
     "normalize-port": "^1.0.0",
     "winston": "^2.3.1"
   },
@@ -25,7 +26,6 @@
     "babel-eslint": "^8.0.1",
     "babel-istanbul": "^0.12.2",
     "babel-preset-env": "^1.6.1",
-    "bithound": "^1.7.0",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "coveralls": "^3.0.0",
